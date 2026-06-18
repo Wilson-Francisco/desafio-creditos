@@ -6,6 +6,7 @@ sqlalchemy==2.0.31
 psycopg[binary]
 pydantic-settings==2.3.3
 pytest==8.2.2
+aio-pika==9.4.1
 
 
 
