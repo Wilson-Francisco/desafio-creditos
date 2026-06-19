@@ -1,9 +1,13 @@
 [tool.ruff]
 target-version = "py310"
-line-length = 88
-select = ["E", "F", "I", "N", "W", "B"]
+line-length = 100 # Aumentamos para 100 para evitar linhas quebradas por pouco
 
-[tool.ruff.isort]
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "B"]
+# Silencia regras de maiúsculas em argumentos/funções e o alerta do Depends do FastAPI
+ignore = ["N803", "N802", "B008"] 
+
+[tool.ruff.lint.isort]
 combine-as-imports = true
 lines-after-imports = 2
 

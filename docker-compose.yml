@@ -15,5 +15,16 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: desafio_rabbitmq_broker
+    restart: always
+    ports:
+      - "5679:5672"
+      - "15679:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
 volumes:
   postgres_data:

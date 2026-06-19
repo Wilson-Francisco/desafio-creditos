@@ -1,5 +1,7 @@
 from typing import List, Optional
+
 from sqlalchemy.orm import Session
+
 from app.models.credito import Credito
 from app.repositories.credito import CreditoRepository
 
