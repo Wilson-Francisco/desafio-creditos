@@ -1,7 +1,9 @@
 from datetime import date
 from decimal import Decimal
-from unittest.mock import MagicMock, PropertyMock
+from unittest.mock import MagicMock
+
 import pytest
+
 from app.models.credito import Credito
 from app.services.credito import CreditoService
 
