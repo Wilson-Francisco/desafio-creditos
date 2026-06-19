@@ -1,11 +1,13 @@
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
+
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
+from app.core.mensageria import enviar_evento_auditoria
 from app.db.session import get_db
 from app.schemas.credito import CreditoResponse
 from app.services.credito import CreditoService
-from app.core.mensageria import enviar_evento_auditoria
+
 
 router = APIRouter(prefix="/api/creditos", tags=["Creditos"])
 

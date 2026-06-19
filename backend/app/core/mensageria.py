@@ -1,6 +1,8 @@
 import json
 from datetime import datetime
+
 import aio_pika
+
 
 RABBITMQ_URL = "amqp://guest:guest@localhost:5679/"
 

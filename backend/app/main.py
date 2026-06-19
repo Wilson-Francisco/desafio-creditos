@@ -1,6 +1,8 @@
 from typing import Dict
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from app.api.creditos import router as creditos_router
 
 
