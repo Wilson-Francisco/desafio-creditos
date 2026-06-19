@@ -1,13 +1,11 @@
 from typing import List
-
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from sqlalchemy.orm import Session
 
-from app.core.mensageria import enviar_evento_auditoria
 from app.db.session import get_db
 from app.schemas.credito import CreditoResponse
 from app.services.credito import CreditoService
-
+from app.core.mensageria import enviar_evento_auditoria
 
 router = APIRouter(prefix="/api/creditos", tags=["Creditos"])
 
@@ -20,10 +18,10 @@ def listar_por_nfse(
     service = CreditoService(db)
     creditos = service.buscar_por_nfse(numeroNfse)
 
-    # Registra o evento de auditoria em segundo plano
     background_tasks.add_task(enviar_evento_auditoria, "NFSE", numeroNfse)
 
-    return creditos
+    # Conversão explícita para satisfazer a tipagem estrita do Mypy
+    return [CreditoResponse.from_orm(c) for c in creditos]
 
 
 @router.get("/credito/{numeroCredito}", response_model=CreditoResponse)
@@ -39,7 +37,7 @@ def obter_por_credito(
             detail=f"Crédito com o número {numeroCredito} não foi encontrado.",
         )
 
-    # Registra o evento de auditoria em segundo plano
     background_tasks.add_task(enviar_evento_auditoria, "NUMERO_CREDITO", numeroCredito)
 
-    return credito
+    # Conversão explícita para satisfazer a tipagem estrita do Mypy
+    return CreditoResponse.from_orm(credito)
